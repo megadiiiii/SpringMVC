@@ -1,7 +1,7 @@
 package com.megadiiiii.web.services.impl;
 
-import com.megadiiiii.web.dto.ClubDto;
 import com.megadiiiii.web.dto.EventDto;
+import com.megadiiiii.web.mapper.EventMapper;
 import com.megadiiiii.web.models.Club;
 import com.megadiiiii.web.models.Event;
 import com.megadiiiii.web.repository.ClubRepository;
@@ -13,15 +13,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.megadiiiii.web.mapper.ClubMapper.mapToClub;
-import static com.megadiiiii.web.mapper.ClubMapper.mapToClubDto;
 import static com.megadiiiii.web.mapper.EventMapper.mapToEvent;
 import static com.megadiiiii.web.mapper.EventMapper.mapToEventDto;
 
 @Service
 public class EventServiceImpl implements EventService {
-    private ClubRepository clubRepository;
-    private EventRepository eventRepository;
+    private final ClubRepository clubRepository;
+    private final EventRepository eventRepository;
 
     @Autowired
     public EventServiceImpl(ClubRepository clubRepository, EventRepository eventRepository) {
@@ -50,10 +48,18 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void updateEvent (EventDto eventDto) {
-        Event event = mapToEvent(eventDto);
-        eventRepository.save(event);
+    public void updateEvent(EventDto eventDto) {
+        Event oldEvent = eventRepository.findById(eventDto.getId()).orElseThrow(() -> new RuntimeException("Event not found"));
+
+        Event updatedEvent = EventMapper.mapToEvent(eventDto);
+        updatedEvent.setCreatedOn(oldEvent.getCreatedOn()); // Save the createdOn
+
+        eventRepository.save(updatedEvent);
     }
 
+    @Override
+    public void deleteEvent(long eventId) {
+        eventRepository.deleteById(eventId);
+    }
 }
 

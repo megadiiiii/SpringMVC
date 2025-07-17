@@ -1,6 +1,5 @@
 package com.megadiiiii.web.controller;
 
-import com.megadiiiii.web.dto.ClubDto;
 import com.megadiiiii.web.dto.EventDto;
 import com.megadiiiii.web.models.Event;
 import com.megadiiiii.web.services.EventService;
@@ -42,11 +41,7 @@ public class EventController {
     }
 
     @PostMapping("/events/{clubId}")
-    public String createEvent(@PathVariable Long clubId, EventDto eventDto, Model model, BindingResult result) {
-        if (result.hasErrors()) {
-            model.addAttribute("event", eventDto);
-            return "clubs-create";
-        }
+    public String createEvent(@PathVariable Long clubId, EventDto eventDto, Model model) {
         eventService.createEvent(clubId, eventDto);
         return "redirect:/clubs/" + clubId;
     }
@@ -71,5 +66,12 @@ public class EventController {
         event.setClub(eventDto.getClub());
         eventService.updateEvent(event);
         return "redirect:/clubs";
+    }
+
+    @GetMapping("/events/{eventId}/delete")
+    public String deleteEvent(@PathVariable("eventId") long eventId, Model model) {
+        Long clubId = eventService.findByEventId(eventId).getClub().getId();
+        eventService.deleteEvent(eventId);
+        return "redirect:/clubs/" + clubId;
     }
 }

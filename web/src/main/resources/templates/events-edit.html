@@ -15,7 +15,7 @@
         <form
           role="form"
           method="post"
-          th:action="@{/events/{eventId}(eventId=${eventId})}"
+          th:action="@{/events/{eventId}/edit(eventId=${event.id})}"
           th:object="${event}"
         >
           <div class="mb-3">
