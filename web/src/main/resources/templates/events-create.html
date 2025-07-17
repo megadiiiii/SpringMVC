@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://thymeleaf.org"
+  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <section layout:fragment="body" class="">
+      <div class="container px-5 my-5">
+        <form
+          role="form"
+          method="post"
+          th:action="@{/events/{clubId}(clubId=${clubId})}"
+          th:object="${event}"
+        >
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              th:field="*{name}"
+              placeholder="Event name"
+            />
+            <label for="type" class="form-label">Type</label>
+            <input
+              type="text"
+              class="form-control"
+              id="type"
+              th:field="*{type}"
+              placeholder="Type"
+            />
+            <p
+              th:if="${#fields.hasErrors('type')}"
+              class="text-danger"
+              th:errors="*{type}"
+            ></p>
+            <label for="photoUrl" class="form-label">Photo URL</label>
+            <input
+              type="text"
+              class="form-control"
+              id="photoUrl"
+              th:field="*{photoUrl}"
+              placeholder="Photo URL"
+            />
+            <p
+              th:if="${#fields.hasErrors('photoUrl')}"
+              class="text-danger"
+              th:errors="*{photoUrl}"
+            ></p>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="startTime" class="form-label">Start Time</label>
+              <input
+                type="datetime-local"
+                class="form-control"
+                id="startTime"
+                th:field="*{startTime}"
+                placeholder="Event start time"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="endTime" class="form-label">End Time</label>
+              <input
+                type="datetime-local"
+                class="form-control"
+                id="endTime"
+                th:field="*{endTime}"
+                placeholder="Event end time"
+              />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>

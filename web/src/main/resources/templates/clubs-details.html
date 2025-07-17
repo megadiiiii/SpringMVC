@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://thymeleaf.org"
+  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title th:text="${club.title}"></title>
+  </head>
+  <body class="d-flex flex-column h-100">
+    <main class="flex-shrink-0">
+      <section layout:fragment="body" class="">
+        <section class="py-5">
+          <div class="container px-5">
+            <h1 class="fw-bolder fs-5 mb-4">Company Blog</h1>
+            <div class="card border-0 shadow rounded-3 overflow-hidden">
+              <div class="card-body p-0">
+                <div class="row gx-0">
+                  <div class="col-lg-6 col-xl-5 py-lg-5">
+                    <div class="p-4 p-md-5">
+                      <div
+                        class="badge bg-primary bg-gradient rounded-pill mb-2"
+                      >
+                        News
+                      </div>
+                      <div class="h2 fw-bolder" th:text="${club.title}"></div>
+                      <p th:text="${club.content}"></p>
+                      <a class="text-decoration-none" href="#!">
+                        Read more
+                        <i class="bi bi-arrow-right"></i>
+                      </a>
+                      <br />
+                      <a
+                        class="btn btn-danger px-4 mt-4"
+                        th:href="@{/clubs/{clubId}/delete(clubId=${club.id})}"
+                        >Delete</a
+                      >
+                      <a
+                        class="btn btn-primary px-4 mt-4"
+                        th:href="@{/events/{clubId}/new(clubId=${club.id})}"
+                        >New Event</a
+                      >
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-xl-7">
+                    <div class="bg-featured-blog">
+                      <img
+                        class="img-fluid rounded-3 mb-3"
+                        th:src="${club.photoUrl}"
+                        alt="..."
+                        height="400px"
+                        width="600px"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Blog preview section-->
+        <section class="py-5">
+          <div class="container px-5">
+            <h2 class="fw-bolder fs-5 mb-4">Upcoming Event</h2>
+            <div class="row gx-5">
+              <div
+                th:if="${#lists.isEmpty(club.events)}"
+                class="text-center text-muted mb-4"
+              >
+                Không có sự kiện nào được tổ chức với thiết bị này.
+              </div>
+              <div th:each="event : ${club.events}" class="col-lg-4 mb-5">
+                <div class="card h-100 shadow border-0">
+                  <div class="p-3">
+                    <div class="ratio ratio-16x9 overflow-hidden rounded-3">
+                      <img
+                        class="card-img-top"
+                        th:src="${event.photoUrl}"
+                        alt="..."
+                      />
+                    </div>
+                  </div>
+                  <div class="card-body p-4 position-relative">
+                    <a
+                      class="text-decoration-none link-dark stretched-link"
+                      href="#!"
+                    >
+                      <p class="h5 card-title mb-3" th:text="${event.name}"></p>
+                    </a>
+                    <p class="card-subtitle mb-2">
+                      Some quick example text to build on the card title and
+                      make up the bulk of the card's content.
+                    </p>
+                    <div
+                      class="btn btn-sm btn-primary rounded-pill mb-1 text-white small"
+                      th:text="${event.type}"
+                    ></div>
+                  </div>
+                  <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                    <div class="d-flex align-items-end justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <img
+                          class="rounded-circle me-3"
+                          src="https://dummyimage.com/40x40/ced4da/6c757d"
+                          alt="..."
+                        />
+                        <div class="small">
+                          <div class="fw-bold">Alphatheta</div>
+                          <div
+                            class="text-muted"
+                            th:text="${#temporals.format(event.startTime, 'MMMM dd, yyyy') + ' &minus; ' + #temporals.format(event.endTime, 'MMMM dd, yyyy')}"
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                    <div class="d-flex align-items-end justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <a
+                          class="btn btn-primary px-4 mt-4 me-1"
+                          th:href="@{/events/{eventId}(eventId=${event.id})}"
+                          >View</a
+                        >
+                        <a
+                          class="btn btn-primary px-4 mt-4 me-1"
+                          th:href="@{/events/{eventId}/edit(eventId=${event.id})}"
+                          >Update</a
+                        >
+                        <!-- <a
+                          class="btn btn-danger px-4 mt-4"
+                          th:href="@{/events/{eventId}/edit(eventId=${event.id})}"
+                          >Delete</a
+                        > -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-end mb-5 mb-xl-0">
+              <a class="text-decoration-none" href="#!">
+                More events
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
