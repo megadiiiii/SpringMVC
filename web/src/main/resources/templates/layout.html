@@ -49,7 +49,7 @@
             <a class="nav-link" href="contact.html">Contact</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pricing.html">Pricing</a>
+            <a class="nav-link" th:href="@{/events}">Events</a>
           </li>
           <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
           <li class="nav-item dropdown">
@@ -92,9 +92,10 @@
                 <a class="dropdown-item" th:href="@{/clubs/new}">Create</a>
               </li>
               <li>
-                <a class="dropdown-item" href="portfolio-item.html"
-                  >Portfolio Item</a
-                >
+                <a class="dropdown-item" th:href="@{/register}">Register</a>
+              </li>
+              <li>
+                <a class="dropdown-item" th:href="@{/login}">Login</a>
               </li>
             </ul>
           </li>
@@ -102,7 +103,7 @@
       </div>
     </div>
   </nav>
-  <body layout:fragment="body" style="min-height: calc(100vh - 131px);"></body>
+  <body layout:fragment="body" style="min-height: calc(100vh - 131px)"></body>
   <footer class="bg-dark py-4 mt-auto">
     <div class="container px-5">
       <div
