@@ -1,6 +1,7 @@
 package com.megadiiiii.web.dto;
 
 import com.megadiiiii.web.models.Event;
+import com.megadiiiii.web.models.UserEntity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -9,7 +10,6 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -25,6 +25,7 @@ public class ClubDto {
     private String photoUrl;
     @NotEmpty(message = "Content should not be empty")
     private String content;
+    private UserEntity createdBy;
     private LocalDateTime creationOn;
     private LocalDateTime updatedOn;
 

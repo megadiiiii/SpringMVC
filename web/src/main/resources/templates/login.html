@@ -47,6 +47,11 @@
                     You have been logged out.
                   </div>
                 </div>
+                <h3 class="lh-base text-center">
+                  Welcome Back
+                  <br />
+                  <span class="h6 text-muted">Sign In Your Account</span>
+                </h3>
                 <form role="form" method="post" th:action="@{/login}">
                   <div class="form-floating mb-3">
                     <input
@@ -73,18 +78,18 @@
                       <span>Password</span>
                     </label>
                   </div>
-                  <div class="d-md-flex align-items-center">
-                    <!-- <div class="form-check">
-                      <input
-                      type="checkbox"
-                      class="form-check-input"
-                      id="sf2"
-                        value="check"
-                      />
-                      <label class="form-check-label" for="sf2"
-                      >Remember Me</label
-                      >
-                    </div> -->
+                  <div class="form-check mt-3">
+                    <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="sf2"
+                      value="check"
+                    />
+                    <label class="form-check-label" for="sf2"
+                    >Remember Me</label
+                    >
+                  </div>
+                  <div class="text-center mt-3">
 
                     <div class="form-actions center">
                       <div class="card-body border-top">
@@ -95,6 +100,16 @@
                         >
                           Register
                         </button> -->
+                        <p>
+                          Don’t have an account yet?
+                          <a
+                            class="h6 link-offset-2 text-success"
+                            th:href="@{/register}"
+                            style="text-decoration: none"
+                            >Create an accout</a
+                          >
+                        </p>
+
                         <button type="submit" class="btn btn-info">
                           Login
                         </button>

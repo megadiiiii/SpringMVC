@@ -8,12 +8,13 @@ import java.util.stream.Collectors;
 import static com.megadiiiii.web.mapper.EventMapper.mapToEventDto;
 
 public class ClubMapper {
-    public static Club mapToClub (ClubDto club) {
+    public static Club mapToClub(ClubDto club) {
         Club clubDto = Club.builder()
                 .id(club.getId())
                 .title(club.getTitle())
                 .photoUrl(club.getPhotoUrl())
                 .content(club.getContent())
+                .createBy(club.getCreatedBy())
                 .creationOn(club.getCreationOn())
                 .updatedOn(club.getUpdatedOn())
                 .build();
