@@ -9,6 +9,8 @@ public interface EventService {
 
     List<EventDto> findAllEvents();
 
+    List<EventDto> findAllEventsStartTimeDesc();
+
     EventDto findByEventId(Long eventId);
 
     void updateEvent(EventDto eventDto);

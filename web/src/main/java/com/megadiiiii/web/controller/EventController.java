@@ -27,7 +27,7 @@ public class EventController {
 
     @GetMapping("/events")
     public String events(Model model) {
-        List<EventDto> events = eventService.findAllEvents();
+        List<EventDto> events = eventService.findAllEventsStartTimeDesc();
         model.addAttribute("events", events);
         return "events-list";
     }
