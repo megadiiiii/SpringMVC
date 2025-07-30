@@ -1,5 +1,6 @@
 package com.megadiiiii.web.controller;
 
+import com.megadiiiii.web.dto.ClubDto;
 import com.megadiiiii.web.dto.EventDto;
 import com.megadiiiii.web.models.Event;
 import com.megadiiiii.web.services.EventService;
@@ -51,6 +52,14 @@ public class EventController {
         EventDto event = eventService.findByEventId(eventId);
         model.addAttribute("event", event);
         return "events-edit";
+    }
+
+    @GetMapping("/events/{eventId}")
+    public String viewEvent(@PathVariable("eventId") long eventId, Model model) {
+        EventDto event = eventService.findByEventId(eventId);
+        model.addAttribute("event", event);
+//        model.addAttribute("club")
+        return "events-details";
     }
 
     @PostMapping("/events/{eventId}/edit")

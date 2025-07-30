@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://thymeleaf.org"
+  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title th:text="${event.name}"></title>
+  </head>
+  <body class="d-flex flex-column h-100">
+    <main class="flex-shrink-0">
+      <section layout:fragment="body" class="">
+        <section class="py-5">
+          <div class="container px-5">
+            <h1 class="fw-bolder fs-5 mb-4">Company Blog</h1>
+            <div class="card border-0 shadow rounded-3 overflow-hidden">
+              <div class="card-body p-0">
+                <div class="row gx-0">
+                  <div class="col-lg-6 col-xl-5 py-lg-5">
+                    <div class="p-4 p-md-5">
+                      <div
+                        th:text="${event.type}"
+                        class="badge bg-primary bg-gradient rounded-pill mb-2"
+                      ></div>
+                      <div class="h2 fw-bolder" th:text="${event.name}"></div>
+                      <div
+                        class="text-muted"
+                        th:text="${#temporals.format(event.startTime, 'hh:mm dd MMMM, yyyy') + ' &minus; ' + #temporals.format(event.endTime, 'hh:mm')}"
+                      ></div>
+                      <!-- <p th:text="${event.}"></p> -->
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-xl-7">
+                    <div
+                      class="bg-featured-blog d-flex justify-content-center align-items-center"
+                      style="min-height: 300px"
+                    >
+                      <img
+                        class="img-fluid rounded-3 mb-3"
+                        th:src="${event.photoUrl}"
+                        alt="..."
+                        style="height: 400px"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Blog preview section-->
+      </section>
+    </main>
+  </body>
+</html>
